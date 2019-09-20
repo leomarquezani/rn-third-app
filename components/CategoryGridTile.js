@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
     itemGrid: {
         flex: 1,
         margin: 15,
-        height: 150
+        height: 150,
+        borderRadius: 10
     },
     container: {
         flex: 1,
