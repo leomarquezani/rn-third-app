@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createAppContainer } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -9,12 +10,19 @@ import CategoryMealsScreen from '../screens/CategoryMealsScreen';
 import MealDetailScreen from '../screens/MealDetailScreen';
 import Colors from '../Constants/Colors';
 import FavoritesScreen from '../screens/FavoritesScreen';
+import FiltersScreen from '../screens/FiltersScreen';
 
 const defautNavOptions = {
     headerStyle: {
         backgroundColor: Colors.primaryColor
     },
-    headerTintColor: 'white'
+    headerTintColor: 'white',
+    headerTitleStyle: {
+        fontFamily: 'open-sans-bold'
+    },
+    headerBackTitleStyle: {
+        fontFamily: 'open-sans'
+    }
 }
 
 const MealsNavigator = createStackNavigator(
@@ -72,9 +80,48 @@ const MealsFavTabNavigator = createBottomTabNavigator(
     },
     {
         tabBarOptions: {
-            activeTintColor: Colors.accentColor
+            activeTintColor: Colors.accentColor,
+            labelStyle: {
+                fontFamily: 'open-sans-bold'
+            }
         }
     }
 );
 
-export default createAppContainer(MealsFavTabNavigator);
+const FiltersNavigator = createStackNavigator(
+    {
+        FiltersScreen: FiltersScreen
+    },
+    {
+        defaultNavigationOptions: defautNavOptions
+    }
+);
+
+const MainNavigator = createDrawerNavigator(
+    {
+        MealsFavorites: 
+        { 
+            screen: MealsFavTabNavigator,
+            navigationOptions: {
+                drawerLabel: 'Meals'
+            }
+        },
+        FiltersScreen: 
+        { 
+            screen: FiltersNavigator,
+            navigationOptions: {
+                drawerLabel: 'Filters'
+            }
+        },
+    },
+    {
+        contentOptions: {
+            activeTintColor: Colors.accentColor,
+            labelStyle: {
+                fontFamily: 'open-sans-bold'
+            }
+        }
+    }
+);
+
+export default createAppContainer(MainNavigator);

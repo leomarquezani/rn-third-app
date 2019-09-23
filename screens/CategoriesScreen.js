@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button, FlatList, TouchableOpacity } from 'react-native';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import CategoryGridTile from '../components/CategoryGridTile';
 import { CATEGORIES } from '../data/dummy-data';
-import Colors from '../Constants/Colors';
+import CustomerHeaderButton from '../components/HeaderButton';
 
 const CategoriesScreen = (props) => {
 
@@ -13,7 +14,7 @@ const CategoriesScreen = (props) => {
                 title={itemData.item.title}
                 color={itemData.item.color}
                 onSelect={() => {
-                    props.navigation.navigate({ 
+                    props.navigation.navigate({     
                         routeName: 'CategoryMeals',
                         params: {
                             categoryId: itemData.item.id
@@ -30,6 +31,21 @@ const CategoriesScreen = (props) => {
             data={CATEGORIES} renderItem={renderGridItem} numColumns={2}
         />
     );
+};
+
+CategoriesScreen.navigationOptions = (navData) => {
+    return {
+        headerTitle: 'Meals Categories',
+        headerLeft: 
+            <HeaderButtons HeaderButtonComponent={CustomerHeaderButton}>
+                <Item 
+                    title="Menu" 
+                    iconName="ios-menu" 
+                    onPress={() => {
+                        navData.navigation.toggleDrawer();
+                    }}/>
+            </HeaderButtons>
+    };
 };
 
 const styles = StyleSheet.create({
