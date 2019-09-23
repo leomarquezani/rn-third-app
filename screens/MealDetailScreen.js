@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import CustomerHeaderButton from '../components/HeaderButton';
 import DefaultText from '../components/DefaultText';
-import { toogleFavorite } from '../store/actions/meals';
+import { toggleFavorite } from '../store/actions/meals';
 
 const ListItem = props => {
     return (
@@ -25,7 +25,7 @@ const MealDetailScreen = (props) => {
     const dispatch = useDispatch();
 
     const toggleFavoriteHandler = useCallback(() => {
-        dispatch(toogleFavorite(mealId));
+        dispatch(toggleFavorite(mealId));
     }, [dispatch, mealId]);
 
     useEffect(() => {
@@ -72,8 +72,8 @@ MealDetailScreen.navigationOptions = (navigationData) => {
             <HeaderButtons HeaderButtonComponent={CustomerHeaderButton}>
                 <Item
                     title="Favorite"
-                    iconName={isfav ? "ios-star" : "ios-star-outline"}
-                    onPress={toogleFavorite}
+                    iconName={isFav ? "ios-star" : "ios-star-outline"}
+                    onPress={toggleFavorite}
                 />
             </HeaderButtons>
         )

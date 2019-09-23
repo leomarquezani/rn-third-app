@@ -7,7 +7,7 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 
 import MealsNavigator from './navigation/MealsNavigator';
-import mealsReducer from './store/reducers';
+import mealsReducer from './store/reducers/meals';
 
 useScreens();
 

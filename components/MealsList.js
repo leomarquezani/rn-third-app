@@ -9,7 +9,7 @@ const MealList = (props) => {
     const favoriteMeals = useSelector(state => state.meals.favoriteMeals);
 
     const renderMealItem = (itemData) => {
-        const isFav = favoriteMeals.some(meal => meal.id === itemData.item.id);
+        const isFav = favoriteMeals.some(meal => itemData.item.id === meal.id);
         return (
             <MealItem 
                 meal={itemData.item}
@@ -19,7 +19,7 @@ const MealList = (props) => {
                         params: {
                             mealId: itemData.item.id,
                             mealTitle: itemData.item.title,
-                            isFav: currentMealIsFavorite
+                            isFav: isFav
                         }
                     })
                 }}
